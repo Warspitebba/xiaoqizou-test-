@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup name =" MusicPlay">
 import { ref } from 'vue';
 
 // 音乐文件路径
@@ -57,3 +57,4 @@ const toggleMusic = () => {
   background-color: rgba(0, 0, 0, 0.9);
 }
 </style>
+

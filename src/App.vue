@@ -2,17 +2,17 @@
   <div id="app">
     <div class="header">
       <h1>烧鸡宵崎奏</h1>
-      <Music @toggle-background="handleBackgroundChange" />
+      <MusicPlay @toggle-background="handleBackgroundChange" />
     </div>
     <ImageSlider />
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import ImageSlider from '@/components/ImageSlider.vue';
-import Music from '@/components/Music.vue';
+import MusicPlay from '@/components/MusicPlay.vue';
 
-const handleBackgroundChange = (isPlaying) => {
+const handleBackgroundChange = (isPlaying: boolean) => {
   console.log('handleBackgroundChange 被调用，isPlaying:', isPlaying); // 调试用
   const body = document.body;
   if (isPlaying) {

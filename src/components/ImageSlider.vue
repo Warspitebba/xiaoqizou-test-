@@ -10,7 +10,7 @@
         :style="{
           backgroundImage: `url(${image})`,
           opacity: index === currentIndex ? 1 : 0.3, // 当前图片不透明，其他图片半透明
-          transform: `rotateY(${index === currentIndex ? 0 : 90}deg) scale(${
+          transform: `rotateY(${index === currentIndex ? 0 : 45}deg) scale(${
             index === currentIndex ? 1 : 0.8
           })`, // 旋转和缩放
         }"
@@ -56,12 +56,20 @@ const nextSlide = () => {
   currentIndex.value =
     currentIndex.value === images.length - 1 ? 0 : currentIndex.value + 1;
 };
-
+let timer= null; // 定时器 ID
 // 切换到指定图片
 const goToSlide = (index) => {
   currentIndex.value = index;
+  // 清除当前定时器
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+  // 重新启动定时器
+  timer = setInterval(() => {
+    nextSlide();
+  }, 5000); // 每 5 秒切换一次
 };
-
 // 自动轮播功能
 onMounted(() => {
   setInterval(() => {
@@ -81,13 +89,14 @@ onMounted(() => {
   justify-content: center; /* 水平居中 */
   align-items: center; /* 垂直居中 */
   border-radius: 20px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8);
   background-color: aliceblue;
+  border: 10px solid rgba(128, 0, 128, 0.4);
 }
 
 .slides {
   display: flex;
-  width: 80%; /* 宽度占父容器80% */
+  width: 100%; /* 宽度占父容器80% */
   height: 100%; /* 高度占满父容器 */
   transition: transform 0.5s ease-in-out;
 }
@@ -147,6 +156,8 @@ onMounted(() => {
 }
 
 .dots span.active {
+  width: 20px; /* 增大圆点尺寸 */
+  height: 20px; /* 增大圆点尺寸 */
   background: rgba(255, 255, 255, 1);
 }
 

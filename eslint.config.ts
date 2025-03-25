@@ -19,4 +19,9 @@ export default defineConfigWithVueTs(
 
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
+  {
+    rules: {
+      'vue/block-lang': 'off', // 关闭 vue/block-lang 规则
+    },
+  }
 )
