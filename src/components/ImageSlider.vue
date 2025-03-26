@@ -81,7 +81,8 @@ onMounted(() => {
 <style scoped>
 .image-slider {
   position: relative;
-  width: 80vw; /* 宽度占视口的 80% */
+  width: 80vw; /* 宽度占视口的 80%，但是不溢出*/
+  max-width: 100%;
   height: 80vh; /* 高度占视口的 80% */
   margin: 0 auto; /* 水平居中 */
   overflow: hidden; /* 隐藏溢出的内容 */
@@ -124,10 +125,27 @@ onMounted(() => {
   font-size: 50px; /* 增大按钮图标尺寸 */
   transition: background 0.2s ease;
 }
-@media (max-width: 768px){
+@media (max-width: 1080px){
+  .image-slider {
+    width: min(80vw, 100% - 40px);/* 确保不溢出 */
+  }
   .nav-btn {
-    padding: 0.8rem;
-    font-size:0.6rem;
+    padding: 12px;
+    font-size: 30px;
+  }
+  .dots span {
+    width: 10px; /* 圆点尺寸 */
+    height: 10px; /* 圆点尺寸 */
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .dots span.active {
+    width: 14px; /* 增大圆点尺寸 */
+    height: 14px; /* 增大圆点尺寸 */
+    background: rgba(255, 255, 255, 1);
   }
 }
 .nav-btn:hover {

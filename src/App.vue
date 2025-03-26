@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div class="header">
-      <h1>烧鸡宵崎奏</h1>
       <MusicPlay @toggle-background="handleBackgroundChange" />
+      <h1>烧鸡宵崎奏</h1>
       <CheckOut v-model="isMusicPlaying"/>
     </div>
     <ImageSlider />
@@ -64,7 +64,7 @@ h1 {
     gap: 8px;  /* 减小间距 */
   }
   h1 {
-    font-size: 16px;  /* 减小字体大小 */
+    font-size: 20px;  /* 减小字体大小 */
     padding: 4px 8px;
   }
   .controls {
@@ -74,7 +74,7 @@ h1 {
 /* 极小屏幕（如iPhone SE）优化 */
 @media (max-width: 375px) {
   h1 {
-    font-size: 0.4rem;
+    font-size: 10px;
   }
 }
 </style>
@@ -101,5 +101,11 @@ body::before {
 }
 body.background-active::before {
   opacity: 1;
+}
+body, html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; /* 双重保险 */
+  touch-action: manipulation; /* 优化移动端触摸 */
 }
 </style>
