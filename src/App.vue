@@ -52,10 +52,11 @@ const handleBackgroundChange = (isPlaying: boolean) => {
   align-items: center;
 }
 h1 {
+  text-align: center;
   background-color: rgb(175, 185, 255);
   color: black;
   border-radius: 5px;
-  padding: 10px 20px;
+  padding: 10px 10px;
   margin: 0;
 }
 /* 移动端适配 */
@@ -65,7 +66,7 @@ h1 {
   }
   h1 {
     font-size: 20px;  /* 减小字体大小 */
-    padding: 4px 8px;
+    padding: 4px 4px;
   }
   .controls {
     gap: 12px;

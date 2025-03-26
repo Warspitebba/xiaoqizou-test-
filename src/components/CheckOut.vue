@@ -60,7 +60,24 @@ watch(() => props.modelValue, (newVal) => {
 .progress {
   height: 100%;
   background-color: pink; /* 进度条填充色 */
+  border-radius: 5px; /* 圆角 */
   transition: width 0.8s ease-in-out; /* 平滑过渡效果 */
+}
+@media (max-width: 1080px){
+  .progress-bar {
+  width: 60px; /* 进度条宽度 */
+  height: 6px; /* 进度条高度 */
+  background-color: #e0e0e0; /* 未填充时的背景色 */
+  border-radius: 2px; /* 圆角 */
+  overflow: hidden; /* 隐藏内部进度溢出部分 */
+  position: relative;
+  }
+  .progress {
+  height: 100%;
+  background-color: pink; /* 进度条填充色 */
+  border-radius: 2px; /* 圆角 */
+  transition: width 0.8s ease-in-out; /* 平滑过渡效果 */
+  }
 }
 
 .progress-bar.active .progress {
