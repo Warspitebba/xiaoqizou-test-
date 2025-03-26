@@ -52,7 +52,18 @@ const toggleMusic = () => {
   cursor: pointer;
   transition: background-color 0.5s ease;
 }
-
+@media (max-width: 1080px) {
+    .music-button {
+    padding: 5px 10px;
+    font-size: 10px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+  }
+}
 .music-button:hover {
   background-color: rgba(0, 0, 0, 0.9);
 }

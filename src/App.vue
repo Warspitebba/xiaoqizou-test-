@@ -59,12 +59,12 @@ h1 {
   margin: 0;
 }
 /* 移动端适配 */
-@media (max-width: 768px) {
+@media (max-width: 1080px) {
   .header {
     gap: 8px;  /* 减小间距 */
   }
   h1 {
-    font-size: 0.6rem;  /* 减小字体大小 */
+    font-size: 16px;  /* 减小字体大小 */
     padding: 4px 8px;
   }
   .controls {
