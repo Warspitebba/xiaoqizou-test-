@@ -37,8 +37,6 @@ const handleBackgroundChange = (isPlaying: boolean) => {
   align-items: center;
   min-height: 90vh;
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 .header {
   display: flex; /* 始终垂直排列（PC端和移动端） */

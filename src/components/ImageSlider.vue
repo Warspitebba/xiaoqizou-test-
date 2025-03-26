@@ -119,11 +119,11 @@ onMounted(() => {
   background: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  padding: 20px; /* 增大按钮尺寸 */
+  width: 60px;
+  height: 60px;
   cursor: pointer;
   border-radius: 50%;
-  font-size: 50px; /* 增大按钮图标尺寸 */
-  aspect-ratio: 1/1;
+  font-size: 40px; /* 增大按钮图标尺寸 */
   transition: background 0.2s ease;
 }
 @media (max-width: 1080px){
@@ -132,8 +132,9 @@ onMounted(() => {
     height: 40vh;
   }
   .nav-btn {
-    padding: 12px;
-    font-size: 30px;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
   }
   .dots span {
     width: 10px; /* 圆点尺寸 */
