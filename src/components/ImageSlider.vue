@@ -126,8 +126,8 @@ onMounted(() => {
 }
 @media (max-width: 1080px){
   .image-slider {
-    width: min(80vw, 100%);/* 确保不溢出 */
-    height: min(80vw, 100%);
+    width: 40vw;/* 确保不溢出 */
+    height: 60vh;
   }
   .nav-btn {
     padding: 12px;
