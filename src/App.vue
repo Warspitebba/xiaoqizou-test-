@@ -3,6 +3,7 @@
     <div class="header">
       <h1>烧鸡宵崎奏</h1>
       <MusicPlay @toggle-background="handleBackgroundChange" />
+      <CheckOut v-model="isMusicPlaying"/>
     </div>
     <ImageSlider />
   </div>
@@ -11,10 +12,14 @@
 <script setup lang="ts">
 import ImageSlider from '@/components/ImageSlider.vue';
 import MusicPlay from '@/components/MusicPlay.vue';
+import CheckOut from './components/CheckOut.vue';
+import { ref } from 'vue';
 
+const isMusicPlaying = ref(false)
 const handleBackgroundChange = (isPlaying: boolean) => {
   console.log('handleBackgroundChange 被调用，isPlaying:', isPlaying); // 调试用
   const body = document.body;
+  isMusicPlaying.value = isPlaying;
   if (isPlaying) {
     body.classList.add('background-active'); // 添加类，显示背景图片
     console.log('背景图片已设置'); // 调试用
@@ -72,5 +77,4 @@ body::before {
 body.background-active::before {
   opacity: 1; /* 完全显示 */
 }
-
 </style>

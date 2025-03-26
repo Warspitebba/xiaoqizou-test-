@@ -21,7 +21,7 @@ const emit = defineEmits(['toggle-background']); // 定义事件
 const toggleMusic = () => {
   if (!audio) {
     audio = new Audio(musicFile); // 初始化音频
-    audio.loop = true; // 设置循环播放
+    audio.loop = false; // 设置循环播放
   }
   if (isPlaying.value) {
     audio.pause(); // 暂停音乐
@@ -50,7 +50,7 @@ const toggleMusic = () => {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.5s ease;
 }
 
 .music-button:hover {
