@@ -122,9 +122,14 @@ onMounted(() => {
   cursor: pointer;
   border-radius: 50%;
   font-size: 50px; /* 增大按钮图标尺寸 */
-  transition: background 0.3s ease;
+  transition: background 0.2s ease;
 }
-
+@media (max-width: 768px){
+  .nav-btn {
+    padding: 0.8rem;
+    font-size:0.6rem;
+  }
+}
 .nav-btn:hover {
   background: rgba(0, 0, 0, 0.8);
 }

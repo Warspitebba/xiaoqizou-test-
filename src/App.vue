@@ -34,30 +34,56 @@ const handleBackgroundChange = (isPlaying: boolean) => {
 #app {
   display: flex;
   flex-direction: column;
-  align-items: center; /* 水平居中 */
-  min-height: 90vh; /* 高度 */
-  box-sizing: border-box; /* 包含内边距在宽度和高度内 */
+  align-items: center;
+  min-height: 90vh;
+  box-sizing: border-box;
 }
 .header {
-  display: flex; /* 将 h1 和 Music 组件放在同一行 */
-  align-items: center; /* 垂直居中 */
-  justify-content: center; /* 水平居中 */
-  gap: 20px; /* h1 和按钮之间的间距 */
+  display: flex; /* 始终垂直排列（PC端和移动端） */
+  align-items: center;
+  justify-content: center;
+  gap: 20px;  /* 标题和下方控件的间距 */
   width: 100%;
-  margin-bottom: 20px; /* 与下方内容的间距 */
+  margin-bottom: 20px;
+}
+.controls {
+  display: flex;
+  gap: 20px;  /* MusicPlay 和 CheckOut 之间的间距 */
+  align-items: center;
 }
 h1 {
   background-color: rgb(175, 185, 255);
   color: black;
   border-radius: 5px;
+  padding: 10px 20px;
+  margin: 0;
 }
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .header {
+    gap: 8px;  /* 减小间距 */
+  }
+  h1 {
+    font-size: 0.6rem;  /* 减小字体大小 */
+    padding: 4px 8px;
+  }
+  .controls {
+    gap: 12px;
+  }
+}
+/* 极小屏幕（如iPhone SE）优化 */
+@media (max-width: 375px) {
+  h1 {
+    font-size: 0.4rem;
+  }
+}
+</style>
+<style>
+/* 全局 body 样式保持不变 */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   background-color: #bb6688;
-  background-size: cover; /* 确保背景图片覆盖整个页面 */
-  background-position: center; /* 背景图片居中 */
-  transition: background-image 1s ease; /* 添加过渡效果 */
 }
 body::before {
   content: '';
@@ -66,15 +92,14 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/bg1.jpg'); /* 背景图片路径 */
+  background-image: url('@/assets/bg1.jpg');
   background-size: cover;
   background-position: center;
-  opacity: 0; /* 初始透明度为 0 */
-  transition: opacity 1.5s ease; /* 淡入淡出过渡效果，持续 1.5 秒 */
-  z-index: -1; /* 放在页面内容下方 */
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  z-index: -1;
 }
-/* 添加背景图片激活样式 */
 body.background-active::before {
-  opacity: 1; /* 完全显示 */
+  opacity: 1;
 }
 </style>
