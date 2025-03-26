@@ -37,6 +37,8 @@ const handleBackgroundChange = (isPlaying: boolean) => {
   align-items: center;
   min-height: 90vh;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 .header {
   display: flex; /* 始终垂直排列（PC端和移动端） */
@@ -102,11 +104,5 @@ body::before {
 }
 body.background-active::before {
   opacity: 1;
-}
-body, html {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden; /* 双重保险 */
-  touch-action: manipulation; /* 优化移动端触摸 */
 }
 </style>

@@ -60,7 +60,8 @@ let timer= null; // 定时器 ID
 // 启动自动轮播
 const startAutoPlay = () => {
   if (timer) {
-    clearInterval(timer); // 清除现有的定时器
+    clearInterval(timer);
+    timer = null; // 清除现有的定时器
   }
   timer = setInterval(() => {
     nextSlide();
@@ -104,7 +105,7 @@ onMounted(() => {
 .slide {
   flex: 0 0 100%; /* 每张幻灯片宽度为 100% */
   height: 100%;
-  background-size: contain; /* 图片完整显示 */
+  background-size: center; /* 图片完整显示 */
   background-position: center; /* 图片居中 */
   background-repeat: no-repeat; /* 防止重复 */
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* 添加过渡效果 */
@@ -122,12 +123,13 @@ onMounted(() => {
   cursor: pointer;
   border-radius: 50%;
   font-size: 50px; /* 增大按钮图标尺寸 */
+  aspect-ratio: 1/1;
   transition: background 0.2s ease;
 }
 @media (max-width: 1080px){
   .image-slider {
-    width: min(80vw, 100%);/* 确保不溢出 */
-    height: min(80vw, 100%);
+    width: 80vw;/* 确保不溢出 */
+    height: 40vh;
   }
   .nav-btn {
     padding: 12px;

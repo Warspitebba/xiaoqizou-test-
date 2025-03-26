@@ -49,7 +49,7 @@ watch(() => props.modelValue, (newVal) => {
 }
 
 .progress-bar {
-  width: 100px; /* 进度条宽度 */
+  width: 150px; /* 进度条宽度 */
   height: 10px; /* 进度条高度 */
   background-color: #e0e0e0; /* 未填充时的背景色 */
   border-radius: 5px; /* 圆角 */
@@ -65,7 +65,7 @@ watch(() => props.modelValue, (newVal) => {
 }
 @media (max-width: 1080px){
   .progress-bar {
-  width: 60px; /* 进度条宽度 */
+  width: 90px; /* 进度条宽度 */
   height: 6px; /* 进度条高度 */
   background-color: #e0e0e0; /* 未填充时的背景色 */
   border-radius: 2px; /* 圆角 */

@@ -55,7 +55,7 @@ const toggleMusic = () => {
 @media (max-width: 1080px) {
     .music-button {
     padding: 5px 10px;
-    font-size: 10px;
+    font-size: 16px;
     color: white;
     background-color: rgba(0, 0, 0, 0.7);
     border: none;
