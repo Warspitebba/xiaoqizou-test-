@@ -103,10 +103,4 @@ body::before {
 body.background-active::before {
   opacity: 1;
 }
-body, html {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden; /* 双重保险 */
-  touch-action: manipulation; /* 优化移动端触摸 */
-}
 </style>
