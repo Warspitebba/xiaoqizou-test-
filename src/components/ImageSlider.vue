@@ -105,7 +105,7 @@ onMounted(() => {
 .slide {
   flex: 0 0 100%; /* 每张幻灯片宽度为 100% */
   height: 100%;
-  background-size: center; /* 图片完整显示 */
+  background-size: contain; /* 图片完整显示 */
   background-position: center; /* 图片居中 */
   background-repeat: no-repeat; /* 防止重复 */
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* 添加过渡效果 */
