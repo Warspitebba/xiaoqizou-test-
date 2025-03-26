@@ -57,24 +57,23 @@ const nextSlide = () => {
     currentIndex.value === images.length - 1 ? 0 : currentIndex.value + 1;
 };
 let timer= null; // 定时器 ID
-// 切换到指定图片
-const goToSlide = (index) => {
-  currentIndex.value = index;
-  // 清除当前定时器
+// 启动自动轮播
+const startAutoPlay = () => {
   if (timer) {
-    clearInterval(timer);
-    timer = null;
+    clearInterval(timer); // 清除现有的定时器
   }
-  // 重新启动定时器
   timer = setInterval(() => {
     nextSlide();
   }, 5000); // 每 5 秒切换一次
 };
-// 自动轮播功能
+// 切换到指定图片
+const goToSlide = (index) => {
+  currentIndex.value = index;
+  startAutoPlay(); // 重新启动自动轮播
+};
+// 组件挂载时启动自动轮播
 onMounted(() => {
-  setInterval(() => {
-    nextSlide();
-  }, 5000); // 每 5 秒切换一次
+  startAutoPlay();
 });
 </script>
 
@@ -127,7 +126,8 @@ onMounted(() => {
 }
 @media (max-width: 1080px){
   .image-slider {
-    width: min(80vw, 100% - 40px);/* 确保不溢出 */
+    width: min(80vw, 100%);/* 确保不溢出 */
+    height: min(80vw, 100%);
   }
   .nav-btn {
     padding: 12px;
