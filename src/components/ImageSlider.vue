@@ -42,9 +42,9 @@ import { ref, onMounted } from 'vue';
 
 // 图片数组
 const images = [
-  new URL('@/assets/image1.png', import.meta.url).href,
+  new URL('@/assets/image1.PNG', import.meta.url).href,
   new URL('@/assets/image2.jpg', import.meta.url).href,
-  new URL('@/assets/image3.png', import.meta.url).href,
+  new URL('@/assets/image3.PNG', import.meta.url).href,
   new URL('@/assets/image4.jpg', import.meta.url).href,
 ];
 
