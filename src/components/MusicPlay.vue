@@ -1,7 +1,7 @@
 <template>
   <div class="music-container">
     <button class="music-button" @click="toggleMusic">
-      {{ isPlaying ? '被命运所喜欢' : '被命运所厌恶' }}
+      {{ isPlaying ? '播放音乐' : '播放音乐' }}
     </button>
   </div>
 </template>

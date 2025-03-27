@@ -2,7 +2,7 @@
   <div id="app">
     <div class="header">
       <MusicPlay @toggle-background="handleBackgroundChange" />
-      <h1>烧鸡宵崎奏</h1>
+      <h1>宵崎奏图片展示</h1>
       <CheckOut v-model="isMusicPlaying"/>
     </div>
     <ImageSlider />

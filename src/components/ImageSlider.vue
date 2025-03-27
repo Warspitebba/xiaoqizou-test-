@@ -1,20 +1,26 @@
 <template>
   <div class="image-slider">
-    <!-- 幻灯片容器 -->
     <div class="slides" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-      <!-- 遍历图片列表，渲染每张图片 -->
       <div
-        class="slide"
         v-for="(image, index) in images"
         :key="index"
+        class="slide"
         :style="{
-          backgroundImage: `url(${image})`,
-          opacity: index === currentIndex ? 1 : 0.3, // 当前图片不透明，其他图片半透明
+          backgroundImage: loadedImages[index] ? `url(${loadedImages[index]})` : 'none',
+          opacity: index === currentIndex ? 1 : 0.3,
           transform: `rotateY(${index === currentIndex ? 0 : 45}deg) scale(${
             index === currentIndex ? 1 : 0.8
-          })`, // 旋转和缩放
+          })`
         }"
-      ></div>
+        v-lazy-load="{
+          src: image,
+          index: index,
+          loadCallback: (imgSrc, idx) => handleImageLoad(imgSrc, idx)
+        }"
+      >
+        <!-- 占位元素（低质量图片或纯色背景） -->
+        <div v-if="!loadedImages[index]" class="placeholder"></div>
+      </div>
     </div>
     <!-- 导航按钮 -->
     <button class="nav-btn prev" @click="prevSlide">&#10094;</button>
@@ -34,27 +40,74 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-// 图片路径列表
+// 图片数组（保持你的原始格式）
 const images = [
-  new URL('@/assets/image1.jpg', import.meta.url).href,
+  new URL('@/assets/image1.png', import.meta.url).href,
   new URL('@/assets/image2.jpg', import.meta.url).href,
-  new URL('@/assets/image3.jpg', import.meta.url).href,
+  new URL('@/assets/image3.png', import.meta.url).href,
   new URL('@/assets/image4.jpg', import.meta.url).href,
 ];
 
-// 当前显示的图片索引
 const currentIndex = ref(0);
+const loadedImages = ref([]); // 存储已加载的图片URL
 
-// 切换到上一张图片
-const prevSlide = () => {
-  currentIndex.value =
-    currentIndex.value === 0 ? images.length - 1 : currentIndex.value - 1;
+// 图片加载完成回调
+const handleImageLoad = (imgSrc, index) => {
+  loadedImages.value[index] = imgSrc;
 };
 
-// 切换到下一张图片
+// 自定义懒加载指令
+const vLazyLoad = {
+  mounted(el, binding) {
+    const { src, index, loadCallback } = binding.value;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // 加载真实图片
+          const img = new Image();
+          img.src = src;
+          img.onload = () => loadCallback(src, index);
+          observer.unobserve(el); // 停止观察
+        }
+      });
+    }, {
+      rootMargin: '100px', // 提前100px触发加载
+      threshold: 0.01
+    });
+
+    observer.observe(el);
+  }
+};
+
+// 预加载当前和相邻的图片（提升用户体验）
+const preloadAdjacentImages = () => {
+  const indicesToLoad = [
+    currentIndex.value,
+    currentIndex.value + 1,
+    currentIndex.value - 1
+  ].filter(idx => idx >= 0 && idx < images.length);
+
+  indicesToLoad.forEach(idx => {
+    if (!loadedImages.value[idx]) {
+      const img = new Image();
+      img.src = images[idx];
+      img.onload = () => handleImageLoad(images[idx], idx);
+    }
+  });
+};
+
+// 原有轮播方法（增加预加载）
 const nextSlide = () => {
-  currentIndex.value =
-    currentIndex.value === images.length - 1 ? 0 : currentIndex.value + 1;
+  currentIndex.value = (currentIndex.value + 1) % images.length;
+  preloadAdjacentImages();
+  startAutoPlay();
+};
+
+const prevSlide = () => {
+  currentIndex.value = (currentIndex.value - 1 + images.length) % images.length;
+  preloadAdjacentImages();
+  startAutoPlay();
 };
 let timer= null; // 定时器 ID
 // 启动自动轮播
@@ -72,13 +125,29 @@ const goToSlide = (index) => {
   currentIndex.value = index;
   startAutoPlay(); // 重新启动自动轮播
 };
-// 组件挂载时启动自动轮播
 onMounted(() => {
-  startAutoPlay();
+  // 初始预加载第一张和相邻图片
+  preloadAdjacentImages();
 });
 </script>
 
 <style scoped>
+/* 新增占位符样式 */
+.placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 200%;
+  animation: placeholderShimmer 1.5s linear infinite;
+}
+
+@keyframes placeholderShimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
 .image-slider {
   position: relative;
   width: 80vw; /* 宽度占视口的 80%，但是不溢出*/
@@ -105,7 +174,7 @@ onMounted(() => {
 .slide {
   flex: 0 0 100%; /* 每张幻灯片宽度为 100% */
   height: 100%;
-  background-size: center; /* 图片完整显示 */
+  background-size: contain; /* 图片完整显示 */
   background-position: center; /* 图片居中 */
   background-repeat: no-repeat; /* 防止重复 */
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out; /* 添加过渡效果 */
