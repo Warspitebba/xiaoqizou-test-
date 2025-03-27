@@ -39,7 +39,7 @@ const handleBackgroundChange = (isPlaying: boolean) => {
   box-sizing: border-box;
 }
 .header {
-  display: flex; /* 始终垂直排列（PC端和移动端） */
+  display: flex; /* 始终垂直排列 */
   align-items: center;
   justify-content: center;
   gap: 20px;  /* 标题和下方控件的间距 */

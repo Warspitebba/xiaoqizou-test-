@@ -40,7 +40,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-// 图片数组（保持你的原始格式）
+// 图片数组
 const images = [
   new URL('@/assets/image1.png', import.meta.url).href,
   new URL('@/assets/image2.jpg', import.meta.url).href,
@@ -80,7 +80,7 @@ const vLazyLoad = {
   }
 };
 
-// 预加载当前和相邻的图片（提升用户体验）
+// 预加载当前和相邻的图片
 const preloadAdjacentImages = () => {
   const indicesToLoad = [
     currentIndex.value,
@@ -97,7 +97,7 @@ const preloadAdjacentImages = () => {
   });
 };
 
-// 原有轮播方法（增加预加载）
+// 原有轮播方法
 const nextSlide = () => {
   currentIndex.value = (currentIndex.value + 1) % images.length;
   preloadAdjacentImages();
@@ -132,7 +132,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* 新增占位符样式 */
+/* 占位符样式 */
 .placeholder {
   position: absolute;
   top: 0;

@@ -11,11 +11,9 @@ import { ref } from 'vue';
 
 // 音乐文件路径
 const musicFile = new URL('@/assets/music.mp3', import.meta.url).href;
-
 const isPlaying = ref(false); // 是否正在播放音乐
-let audio = null; // 音频对象
-
 const emit = defineEmits(['toggle-background']); // 定义事件
+let audio = null; // 音频对象
 
 // 播放或暂停音乐
 const toggleMusic = () => {
@@ -41,7 +39,6 @@ const toggleMusic = () => {
   justify-content: center; /* 水平居中 */
   align-items: center; /* 垂直居中 */
 }
-
 .music-button {
   padding: 10px 20px;
   font-size: 16px;

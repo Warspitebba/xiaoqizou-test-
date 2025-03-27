@@ -11,18 +11,14 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import { ref, watch } from 'vue'
 
 const props = defineProps({
   modelValue: Boolean
 })
-
 const emit = defineEmits(['update:modelValue'])
-
 const progressWidth = ref('0%') // 进度条宽度
-
 // 切换状态
 const toggleChecked = () => {
   emit('update:modelValue', !props.modelValue)
@@ -37,17 +33,14 @@ watch(() => props.modelValue, (newVal) => {
   }
 }, { immediate: true })
 </script>
-
 <style scoped>
 .hidden-checkbox {
   display: none;
 }
-
 .checkbox-container {
   display: inline-block;
   cursor: pointer;
 }
-
 .progress-bar {
   width: 150px; /* 进度条宽度 */
   height: 10px; /* 进度条高度 */
@@ -79,7 +72,6 @@ watch(() => props.modelValue, (newVal) => {
   transition: width 0.8s ease-in-out; /* 平滑过渡效果 */
   }
 }
-
 .progress-bar.active .progress {
   width: 100%; /* 勾选时进度条满 */
 }
